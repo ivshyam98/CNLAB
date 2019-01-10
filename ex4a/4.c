@@ -1,6 +1,7 @@
+
 #include<stdio.h>
 void dijkstra(int,int [20][20],int [20],int [20],int);
-void main()
+int main()
 {
 	int i,j,n,visited[20],source,cost[20][20],dist[20];
 	printf("Enter no of vertices:");
@@ -24,7 +25,7 @@ void main()
 	for(i=1;i<=n;i++)
  	if(i!=source)
   		printf("\nShortest path from %d to %d is %d",source,i,dist[i]);
-    return 0;
+  
 }
 
 void dijkstra(int source,int cost[20][20],int visited[20],int dist[20],int n)
@@ -64,6 +65,17 @@ void dijkstra(int source,int cost[20][20],int visited[20],int dist[20],int n)
 	   	if(dist[w]>cost[u][w]+dist[u])
 	   	  dist[w]=cost[u][w]+dist[u];
 	  	}
-	    }
+	       }
    	}
+          for(i=1;i<=n;i++)
+	{      
+		for(j=1;j<=n;j++)
+		{      
+			if(dist[j]>dist[i]+cost[i][j])
+			{
+				printf("\nThe Graph contains Negative Cycles!\n");
+				exit(0);
+			}
+		}	
+	}
 }
